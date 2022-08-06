@@ -5,7 +5,7 @@ from typing import Union
 import requests
 
 GITHUB_API = 'https://api.github.com/search/repositories'
-REPO_PER_PAGE = 1000
+REPO_PER_PAGE = 100
 
 
 class Repockup(object):
