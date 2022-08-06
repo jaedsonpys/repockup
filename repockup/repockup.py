@@ -83,3 +83,18 @@ class Repockup(object):
     def _clone_repositories(self, ssh_urls: list) -> None:
         for url in ssh_urls:
             process = subprocess.Popen(f'cd {self._repo_temp} && git clone {url}', shell=True)
+
+    def _start_threads(self, repositories: list):
+        split_repo = self._split_repositories(repositories)
+        threads = []
+
+        for repo in split_repo:
+            th = Thread(target=self._clone_repository, args=(repo,))
+            threads.append(th)
+            th.start()
+
+        while True:
+            alive_list = [i.is_alive() for i in threads]
+
+            if sum(alive_list) == 0:
+                break
