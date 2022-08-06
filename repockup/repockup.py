@@ -79,7 +79,7 @@ class Repockup(object):
 
     def _split_repositories(self, repositories: list) -> list:
         num = int(len(repositories) / 4)
-        split_list = [repositories[i:i + num] for i in range(0, len(num), num)]
+        split_list = [repositories[i:i + num] for i in range(0, len(repositories), num)]
         return split_list
 
     def _clone_repositories(self, ssh_urls: list) -> None:
