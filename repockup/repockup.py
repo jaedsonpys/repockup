@@ -26,6 +26,12 @@ class Repockup(object):
         self._repo_json = os.path.join(home_user, 'repockup.json')
         self._repo_temp = os.path.join(home_user, 'repockup_temp')
 
+        if not os.path.isdir(self._repo_temp):
+            os.mkdir(self._repo_temp)
+        else:
+            shutil.rmtree(self._repo_temp, ignore_errors=True)
+            os.mkdir(self._repo_temp)
+
     def _get_repositories(self) -> list:
         repositories = []
 
