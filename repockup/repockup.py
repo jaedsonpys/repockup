@@ -37,6 +37,8 @@ class Repockup(object):
 
         if self._api_token:
             headers = {'Authorization': f'token {self._api_token}'}
+        else:
+            headers = None
 
         page = 1
 
