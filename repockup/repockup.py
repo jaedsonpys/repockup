@@ -1,4 +1,5 @@
 import os
+import json
 import shutil
 from typing import Union
 
@@ -12,6 +13,9 @@ class Repockup(object):
     def __init__(self, username: str, api_token: str = None) -> None:
         self._api_token = api_token
         self._username = username
+
+        home_user = os.getenv('HOME')
+        self._repo_json = os.path.join(home_user, 'repockup.json')
 
     def _get_repositories(self) -> dict:
         repositories = {}
