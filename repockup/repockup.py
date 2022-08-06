@@ -48,3 +48,7 @@ class Repockup(object):
             repo_json  = []
         
         return repo_json
+
+    def _add_repo_json(self, data: list) -> None:
+        with open(self._repo_json, 'w') as writer:
+            json.dump(data, writer, indent=4, ensure_ascii=False)
