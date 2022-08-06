@@ -13,8 +13,8 @@ class Repockup(object):
         self._api_token = api_token
         self._username = username
 
-    def _get_repositories(self) -> Union[list, None]:
-        result = None
+    def _get_repositories(self) -> dict:
+        repositories = {}
 
         headers = {
             'Authorization': f'token {self._api_token}'
@@ -24,6 +24,15 @@ class Repockup(object):
         req = requests.get(user_url, headers=headers)
 
         if req.status_code == 200:
-            result =  req.json()
-        
-        return result
+            result = req.json()
+            items = result.get('items')
+
+            for repo in items:
+                repo_data = {
+                    'pushed_at': repo['pushed_at'],
+                    'clone_url': repo['ssh_url']
+                }
+                
+                repositories[repo['name']] = repo_data
+
+        return repositories
