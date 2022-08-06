@@ -1,5 +1,5 @@
-import os
 import json
+import os
 import shutil
 from typing import Union
 
@@ -66,3 +66,8 @@ class Repockup(object):
     def _add_repo_json(self, data: list) -> None:
         with open(self._repo_json, 'w') as writer:
             json.dump(data, writer, indent=4, ensure_ascii=False)
+
+    def _split_repositories(self, repositories: list) -> list:
+        num = int(len(repositories) / 4)
+        split_list = [repositories[i:i + num] for i in range(0, len(num), num)]
+        return split_list
