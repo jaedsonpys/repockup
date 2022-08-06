@@ -3,7 +3,8 @@ import shutil
 
 import requests
 
-GITHUB_API = 'https://api.github.com/users'
+GITHUB_API = 'https://api.github.com/search/repositories'
+REPO_PER_PAGE = 1000
 
 
 class Repockup(object):
