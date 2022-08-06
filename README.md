@@ -1,3 +1,14 @@
 # Repockup
 
-Clone all your repositories quickly and simply
+Clone all your repositories (including private ones) with `Repockup` quickly and simply!
+
+**Repockup** stores information about that repository on the first run of the script, and only clones it again if the repository has changed.
+
+## License
+
+```
+MIT License
+Copyright (c) 2022 Jaedson Silva
+```
+
+This project use **MIT License**, see [LICENSE](https://github.com/jaedsonpys/repockup/blob/master/LICENSE) file.
