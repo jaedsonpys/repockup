@@ -17,8 +17,8 @@ class Repockup(object):
         home_user = os.getenv('HOME')
         self._repo_json = os.path.join(home_user, 'repockup.json')
 
-    def _get_repositories(self) -> dict:
-        repositories = {}
+    def _get_repositories(self) -> list:
+        repositories = []
 
         headers = {
             'Authorization': f'token {self._api_token}'
@@ -32,11 +32,10 @@ class Repockup(object):
             items = result.get('items')
 
             for repo in items:
-                repo_data = {
+                repositories.append({
+                    'name': repo['name'],
                     'pushed_at': repo['pushed_at'],
                     'clone_url': repo['ssh_url']
-                }
-                
-                repositories[repo['name']] = repo_data
+                })
 
         return repositories
