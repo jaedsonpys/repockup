@@ -20,9 +20,8 @@ class Repockup(object):
     def _get_repositories(self) -> list:
         repositories = []
 
-        headers = {
-            'Authorization': f'token {self._api_token}'
-        }
+        if self._api_token:
+            headers = {'Authorization': f'token {self._api_token}'}
 
         user_url = f'{GITHUB_API}?q=user:{self._username}&per_page={REPO_PER_PAGE}'
         req = requests.get(user_url, headers=headers)
