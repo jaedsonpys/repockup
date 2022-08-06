@@ -30,19 +30,27 @@ class Repockup(object):
         if self._api_token:
             headers = {'Authorization': f'token {self._api_token}'}
 
-        user_url = f'{GITHUB_API}?q=user:{self._username}&per_page={REPO_PER_PAGE}'
-        req = requests.get(user_url, headers=headers)
+        page = 1
 
-        if req.status_code == 200:
-            result = req.json()
-            items = result.get('items')
+        while True:
+            user_url = f'{GITHUB_API}?q=user:{self._username}&per_page={REPO_PER_PAGE}&page={page}'
+            req = requests.get(user_url, headers=headers)
 
-            for repo in items:
-                repositories.append({
-                    'name': repo['name'],
-                    'pushed_at': repo['pushed_at'],
-                    'clone_url': repo['ssh_url']
-                })
+            page += 1
+
+            if req.status_code == 200:
+                result = req.json()
+                items = result.get('items')
+
+                if items:
+                    for repo in items:
+                        repositories.append({
+                            'name': repo['name'],
+                            'pushed_at': repo['pushed_at'],
+                            'clone_url': repo['ssh_url']
+                        })
+                else:
+                    break
 
         return repositories
 
