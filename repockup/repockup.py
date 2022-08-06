@@ -10,9 +10,16 @@ REPO_PER_PAGE = 100
 
 
 class Repockup(object):
-    def __init__(self, username: str, api_token: str = None) -> None:
-        self._api_token = api_token
+    def __init__(
+        self,
+        username: str,
+        dest_dir: str,
+        api_token: str = None
+    ) -> None:
         self._username = username
+        self._dest_dir = dest_dir
+        self._api_token = api_token
+       
 
         home_user = os.getenv('HOME')
         self._repo_json = os.path.join(home_user, 'repockup.json')
