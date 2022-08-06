@@ -1,6 +1,8 @@
 import json
 import os
 import shutil
+import subprocess
+from threading import Thread
 from typing import Union
 
 import requests
@@ -19,10 +21,10 @@ class Repockup(object):
         self._username = username
         self._dest_dir = dest_dir
         self._api_token = api_token
-       
 
         home_user = os.getenv('HOME')
         self._repo_json = os.path.join(home_user, 'repockup.json')
+        self._repo_temp = os.path.join(home_user, 'repockup_temp')
 
     def _get_repositories(self) -> list:
         repositories = []
