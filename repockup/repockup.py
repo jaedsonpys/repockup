@@ -39,3 +39,12 @@ class Repockup(object):
                 })
 
         return repositories
+
+    def _get_repo_json(self) -> list:
+        if os.path.isfile(self._repo_json):
+            with open(self._repo_json, 'r') as reader:
+                repo_json = json.load(reader)
+        else:
+            repo_json  = []
+        
+        return repo_json
