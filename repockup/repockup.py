@@ -93,7 +93,7 @@ class Repockup(object):
         threads = []
 
         for repo in split_repo:
-            th = Thread(target=self._clone_repository, args=(repo,))
+            th = Thread(target=self._clone_repositories, args=(repo,))
             threads.append(th)
             th.start()
 
