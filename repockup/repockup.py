@@ -82,9 +82,11 @@ class Repockup(object):
         split_list = [repositories[i:i + num] for i in range(0, len(repositories), num)]
         return split_list
 
-    def _clone_repositories(self, ssh_urls: list) -> None:
-        for url in ssh_urls:
+    def _clone_repositories(self, repositories: list) -> None:
+        for repo in repositories:
+            url = repo.get('clone_url')
             process = subprocess.Popen(f'cd {self._repo_temp} && git clone {url}', shell=True)
+            process.wait()
 
     def _start_threads(self, repositories: list):
         split_repo = self._split_repositories(repositories)
