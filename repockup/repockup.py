@@ -22,9 +22,9 @@ class Repockup(object):
         self._dest_dir = dest_dir
         self._api_token = api_token
 
-        home_user = os.getenv('HOME')
-        self._repo_json = os.path.join(home_user, 'repockup.json')
-        self._repo_temp = os.path.join(home_user, 'repockup_temp')
+        self._home_user = os.getenv('HOME')
+        self._repo_json = os.path.join(self._home_user, 'repockup.json')
+        self._repo_temp = os.path.join(self._home_user, 'repockup_temp')
 
         if not os.path.isdir(self._repo_temp):
             os.mkdir(self._repo_temp)
@@ -107,6 +107,16 @@ class Repockup(object):
             if sum(alive_list) == 0:
                 break
 
+    def _move_to_dest(self) -> None:
+        if not os.path.isdir(self._dest_dir):
+            raise FileNotFoundError(f'"{self._dest_dir}" not found')
+
+        base_name = f'{self._username}-repositories'
+        file_path = os.path.join(self._home_user, base_name)
+
+        shutil.make_archive(file_path, 'zip', self._repo_temp)
+        shutil.move(file_path + '.zip', self._dest_dir)
+
     def _has_changed(self, repositories: list, repository: dict) -> bool:
         for repo in repositories:
             if repo['name'] == repository['name']:
@@ -130,3 +140,5 @@ class Repockup(object):
 
             self._clone_repositories(to_update)
             self._add_repo_json(repositories)
+
+        self._move_to_dest()
