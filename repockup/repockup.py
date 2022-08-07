@@ -106,3 +106,11 @@ class Repockup(object):
 
             if sum(alive_list) == 0:
                 break
+
+    def backup(self) -> None:
+        repositories = self._get_repositories()
+        repo_json = self._get_repo_json()
+
+        if not repo_json:
+            self._start_threads(repositories)
+            self._add_repo_json(repositories)
