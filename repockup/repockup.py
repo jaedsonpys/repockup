@@ -122,7 +122,7 @@ class Repockup(object):
             if repo['name'] == repository['name']:
                 return repo['pushed_at'] != repository['pushed_at']
 
-        return False
+        return True
 
     def backup(self) -> None:
         repositories = self._get_repositories()
