@@ -85,7 +85,11 @@ class Repockup(object):
     def _clone_repositories(self, repositories: list) -> None:
         for repo in repositories:
             url = repo.get('clone_url')
-            process = subprocess.Popen(f'cd {self._repo_temp} && git clone {url}', shell=True)
+            name = repo.get('name')
+
+            print(f'Cloning "{name}"...')
+
+            process = subprocess.Popen(f'cd {self._repo_temp} && git clone {url} -q', shell=True)
             process.wait()
 
     def _start_threads(self, repositories: list):
