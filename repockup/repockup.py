@@ -107,6 +107,11 @@ class Repockup(object):
             if sum(alive_list) == 0:
                 break
 
+    def _has_changed(self, repositories: list, repository: dict) -> bool:
+        for repo in repositories:
+            if repo['name'] == repository['name']:
+                return repo['pushed_at'] != repository['pushed_at']
+
     def backup(self) -> None:
         repositories = self._get_repositories()
         repo_json = self._get_repo_json()
