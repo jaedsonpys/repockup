@@ -119,3 +119,12 @@ class Repockup(object):
         if not repo_json:
             self._start_threads(repositories)
             self._add_repo_json(repositories)
+        else:
+            to_update = []
+
+            for repo in repo_json:
+                if self._has_changed(repositories, repo):
+                    to_update.append(repo)
+
+            self._start_threads(to_update)
+            self._add_repo_json(repositories)
