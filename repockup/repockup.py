@@ -128,5 +128,5 @@ class Repockup(object):
                 if self._has_changed(repositories, repo):
                     to_update.append(repo)
 
-            self._start_threads(to_update)
+            self._clone_repositories(to_update)
             self._add_repo_json(repositories)
