@@ -113,8 +113,12 @@ class Repockup(object):
 
         base_name = f'{self._username}-repositories'
         file_path = os.path.join(self._home_user, base_name)
-
+        dest_zip_path = os.path.join(self._dest_dir, base_name + '.zip')
         shutil.make_archive(file_path, 'zip', self._repo_temp)
+
+        if os.path.isfile(dest_zip_path):
+            os.remove(dest_zip_path)
+
         shutil.move(file_path + '.zip', self._dest_dir)
 
     def _has_changed(self, repositories: list, repository: dict) -> bool:
