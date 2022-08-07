@@ -3,7 +3,6 @@ import os
 import shutil
 import subprocess
 from threading import Thread
-from typing import Union
 
 import requests
 
