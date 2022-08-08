@@ -137,8 +137,8 @@ class Repockup(object):
         else:
             to_update = []
 
-            for repo in repo_json:
-                if self._has_changed(repositories, repo):
+            for repo in repositories:
+                if self._has_changed(repo_json, repo):
                     to_update.append(repo)
 
             self._clone_repositories(to_update)
