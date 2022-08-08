@@ -15,5 +15,10 @@ setup(
     packages=['repockup'],
     url='https://github.com/jaedsonpys/repockup',
     keywords=['backup', 'github', 'git', 'repositories'],
-    install_requires=['requests']
+    install_requires=['requests'],
+    entry_points={
+        'console_scripts': [
+            'repockup = repockup.__main__:main'
+        ]
+    }
 )
