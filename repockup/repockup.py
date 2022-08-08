@@ -14,16 +14,20 @@ class Repockup(object):
     def __init__(
         self,
         username: str,
-        dest_dir: str,
+        dest_dir: str = None,
         api_token: str = None
     ) -> None:
         self._username = username
-        self._dest_dir = dest_dir
         self._api_token = api_token
 
         self._home_user = os.getenv('HOME')
         self._repo_json = os.path.join(self._home_user, 'repockup.json')
         self._repo_temp = os.path.join(self._home_user, 'repockup_temp')
+
+        if not dest_dir:
+            self._dest_dir = self._home_user
+        else:
+            self._dest_dir = dest_dir
 
         if not os.path.isdir(self._repo_temp):
             os.mkdir(self._repo_temp)
