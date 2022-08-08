@@ -10,3 +10,9 @@ def main():
         description='Clone all your repositories with Repockup quickly and simply!',
         version=__version__
     )
+
+    parser.add_argument('backup', 'Clone all repositories', action='store_true')
+    parser.add_flag('--username', 'Username from GitHub')
+    parser.add_flag('--token', 'API token from GitHub (to clone private repositories)')
+
+    args = parser.get_args()
