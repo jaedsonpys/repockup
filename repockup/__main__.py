@@ -14,5 +14,6 @@ def main():
     parser.add_argument('backup', 'Clone all repositories', action='store_true')
     parser.add_flag('--username', 'Username from GitHub')
     parser.add_flag('--token', 'API token from GitHub (to clone private repositories)')
+    parser.add_flag('--dest', 'Destination of the repositories ZIP file')
 
     args = parser.get_args()
