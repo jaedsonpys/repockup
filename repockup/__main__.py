@@ -37,6 +37,11 @@ def main() -> bool:
             print('fatal: file destination is required')
 
         repockup = Repockup(username, dest_dir=file_dest, api_token=api_token)        
-        repockup.backup()
+        status = repockup.backup()
+
+        if status:
+            print('OK')
+        else:
+            print('\033[31mThere are no repositories to clone\033[m')
 
     return False
