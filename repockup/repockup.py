@@ -134,13 +134,17 @@ class Repockup(object):
 
         return True
 
-    def backup(self) -> None:
+    def backup(self) -> bool:
         repositories = self._get_repositories()
         repo_json = self._get_repo_json()
+
+        status = False
 
         if not repo_json:
             self._start_threads(repositories)
             self._add_repo_json(repositories)
+            self._move_to_dest()
+            status = True
         else:
             to_update = []
 
@@ -148,8 +152,10 @@ class Repockup(object):
                 if self._has_changed(repo_json, repo):
                     to_update.append(repo)
 
-            self._clone_repositories(to_update)
-            self._add_repo_json(repositories)
+            if to_update:
+                self._clone_repositories(to_update)
+                self._add_repo_json(repositories)
+                self._move_to_dest()
+                status = True
 
-        self._move_to_dest()
-        print('OK')
+        return status
