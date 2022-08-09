@@ -4,6 +4,12 @@ Clone all your repositories (including private ones) with `Repockup` quickly and
 
 **Repockup** stores information about that repository on the first run of the script, and only clones it again if the repository has changed.
 
+Install `Repockup` using setuptools:
+
+```
+python3 setup.py install
+```
+
 ## License
 
 ```
